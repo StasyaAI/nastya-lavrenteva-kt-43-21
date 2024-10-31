@@ -6,9 +6,9 @@ namespace _1_лабораторная.Database
 {
     public class TeacherDbContext : DbContext
     {
-        DbSet<Teacher> Teachers { get; set; }
-        DbSet<Department> Departments { get; set; }
-        DbSet<Position> Positions { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Department> Department { get; set; }
+        public DbSet<Position> Positions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +19,7 @@ namespace _1_лабораторная.Database
 
         public TeacherDbContext(DbContextOptions<TeacherDbContext> options) : base(options)
         {
+
         }
     }
 }

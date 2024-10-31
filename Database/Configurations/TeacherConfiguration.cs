@@ -12,70 +12,65 @@ namespace _1_лабораторная.Database.Configurations
         public void Configure(EntityTypeBuilder<Teacher> builder)
         {
             builder
-                .HasKey(p => p.TeacherId)
-                .HasName($"pk_{TableName}_teacher_id");
+              .HasKey(t => t.TeacherId)
+              .HasName($"pk_{TableName}_teacher_id");
 
-            builder.Property(p => p.TeacherId)
-                  .ValueGeneratedOnAdd();
+            builder.Property(t => t.TeacherId)
+                   .ValueGeneratedOnAdd();
 
-            builder.Property(p => p.TeacherId)
-                .HasColumnName("teacher_id")
-                .HasComment("Идентификатор записи преподавателя");
+            builder.Property(t => t.TeacherId)
+              .HasColumnName("teacher_id")
+              .HasComment("Идентификатор записи студента");
 
             builder.Property(p => p.FirstName)
-                .IsRequired()
-                .HasColumnName("c_teacher_firstname")
-                .HasColumnType(ColumnType.String).HasMaxLength(100)
-                .HasComment("Имя преподавателя");
+              .IsRequired()
+              .HasColumnName("c_teacher_firstname")
+              .HasColumnType(ColumnType.String).HasMaxLength(100);
 
             builder.Property(p => p.LastName)
-                .IsRequired()
-                .HasColumnName("c_teacher_lastname")
-                .HasColumnType(ColumnType.String).HasMaxLength(100)
-                .HasComment("Фамилия преподавателя");
+              .IsRequired()
+              .HasColumnName("c_teacher_lastname")
+              .HasColumnType(ColumnType.String).HasMaxLength(100);
 
             builder.Property(p => p.MiddleName)
                 .HasColumnName("c_teacher_middlename")
-                .HasColumnType(ColumnType.String).HasMaxLength(100)
-                .HasComment("Отчество преподавателя");
+                .HasColumnType(ColumnType.String).HasMaxLength(100);
 
-        // Конфигурирование "Кафедра"
             builder.Property(p => p.DepartmentId)
-                  .IsRequired()
-                  .HasColumnName("f_department_id")
-                  .HasColumnType(ColumnType.Int)
-                  .HasComment("Идентификатор кафедры");
+              .IsRequired()
+              .HasColumnName("f_department_id")
+              .HasColumnType(ColumnType.Int);
 
             builder.ToTable(TableName)
-                .HasOne(p => p.Department)
-                .WithMany()
-                .HasForeignKey(p => p.DepartmentId)
-                .HasConstraintName("fk_f_deparment_id")
-                .OnDelete(DeleteBehavior.Cascade);
+              .HasOne(p => p.Department)
+              .WithMany()
+              .HasForeignKey(p => p.DepartmentId)
+              .HasConstraintName("fk_f_department_id")
+              .OnDelete(DeleteBehavior.Cascade);
 
             builder.ToTable(TableName)
-               .HasIndex(p => p.DepartmentId, $"idx_{TableName}_fk_f_department_id");
+              .HasIndex(p => p.DepartmentId, $"idx_{TableName}_fk_f_department_id");
 
-            builder.Navigation(p => p.Department).AutoInclude();
+            builder.Navigation(p => p.Department)
+              .AutoInclude();
 
-        // Конфигурирование "Должность"
             builder.Property(p => p.PositionId)
-                  .IsRequired()
-                  .HasColumnName("f_position_id")
-                  .HasColumnType(ColumnType.Int)
-                  .HasComment("Идентификатор должности");
+              .IsRequired()
+              .HasColumnName("f_position_id")
+              .HasColumnType(ColumnType.Int);
 
             builder.ToTable(TableName)
-                .HasOne(p => p.Position)
-                .WithMany()
-                .HasForeignKey(p => p.PositionId)
-                .HasConstraintName("fk_f_position_id")
-                .OnDelete(DeleteBehavior.Cascade);
+              .HasOne(p => p.Position)
+              .WithMany()
+              .HasForeignKey(p => p.PositionId)
+              .HasConstraintName("fk_f_position_id")
+              .OnDelete(DeleteBehavior.Cascade);
 
             builder.ToTable(TableName)
-               .HasIndex(p => p.PositionId, $"idx_{TableName}_fk_f_position_id");
+              .HasIndex(p => p.PositionId, $"idx_{TableName}_fk_c_position_id");
 
-            builder.Navigation(p => p.Position);
+            builder.Navigation(p => p.Position)
+              .AutoInclude();
         }
     }
 }
