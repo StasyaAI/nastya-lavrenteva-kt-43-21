@@ -57,7 +57,7 @@ namespace _1_лабораторная.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("position_id")
-                        .HasComment("Идентификатор должности");
+                        .HasComment("Идентификатор записи должности");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PositionId"));
 
@@ -65,7 +65,7 @@ namespace _1_лабораторная.Migrations
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("varchar")
-                        .HasColumnName("c_position_firstname")
+                        .HasColumnName("c_position_name")
                         .HasComment("Название должности");
 
                     b.HasKey("PositionId")

@@ -9,9 +9,9 @@ namespace _1_лабораторная.Controllers
     public class TeachersController : ControllerBase
     {
         private readonly ILogger<TeachersController> _logger;
-        private readonly ITeacherService _teacherService;
+        private readonly ITeacherFilterInterfaceService _teacherService;
 
-        public TeachersController(ILogger<TeachersController> logger, ITeacherService studentService, ITeacherService teacherService)
+        public TeachersController(ILogger<TeachersController> logger, ITeacherService studentService, ITeacherFilterInterfaceService teacherService)
         {
             _logger = logger;
             _teacherService = teacherService;

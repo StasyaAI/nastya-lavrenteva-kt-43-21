@@ -12,8 +12,8 @@ using _1_лабораторная.Database;
 namespace _1_лабораторная.Migrations
 {
     [DbContext(typeof(TeacherDbContext))]
-    [Migration("20241031170438_CreateDatabase_2")]
-    partial class CreateDatabase_2
+    [Migration("20241113093536_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,7 +59,7 @@ namespace _1_лабораторная.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("position_id")
-                        .HasComment("Идентификатор должности");
+                        .HasComment("Идентификатор записи должности");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PositionId"));
 
@@ -67,7 +67,7 @@ namespace _1_лабораторная.Migrations
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("varchar")
-                        .HasColumnName("c_position_firstname")
+                        .HasColumnName("c_position_name")
                         .HasComment("Название должности");
 
                     b.HasKey("PositionId")

@@ -5,7 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace _1_лабораторная.Migrations
 {
-    public partial class CreateDatabase_2 : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,9 +13,9 @@ namespace _1_лабораторная.Migrations
                 name: "cd_position",
                 columns: table => new
                 {
-                    position_id = table.Column<int>(type: "integer", nullable: false, comment: "Идентификатор должности")
+                    position_id = table.Column<int>(type: "integer", nullable: false, comment: "Идентификатор записи должности")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    c_position_firstname = table.Column<string>(type: "varchar", maxLength: 150, nullable: false, comment: "Название должности")
+                    c_position_name = table.Column<string>(type: "varchar", maxLength: 150, nullable: false, comment: "Название должности")
                 },
                 constraints: table =>
                 {

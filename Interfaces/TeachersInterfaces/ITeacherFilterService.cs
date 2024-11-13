@@ -42,7 +42,7 @@ namespace _1_лабораторная.Interfaces.TeachersInterfaces
 
         public Task<Teacher[]> GetTeachersByPositionAsync(TeacherPositionFilter filter, CancellationToken cancellationToken = default)
         {
-            var teacher = _dbContext.Set<Teacher>().Where(w => w.Position.PositionName == filter.PositionName).ToArrayAsync(cancellationToken);
+            var teacher = _dbContext.Set<Teacher>().Where(w => w.Position.Name == filter.PositionName).ToArrayAsync(cancellationToken);
 
             return teacher;
         }

@@ -7,7 +7,10 @@ namespace _1_лабораторная.Interfaces.TeachersInterfaces
 {
     public interface ITeacherService
     {
-        public Task<Teacher[]> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken);
+        public Task<Teacher> AddTeacher(Teacher teacher);
+        public bool TeacherExists(int teacherId);
+        public bool UpdateTeacher(Teacher teacher);
+        public bool DeleteTeacher(Teacher teacher);
     }
 
     public class TeacherService : ITeacherService
@@ -19,11 +22,28 @@ namespace _1_лабораторная.Interfaces.TeachersInterfaces
             _dbContext = dbContext;
         }
 
-        public async Task<Teacher[]> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken = default)
+        public async Task<Teacher> AddTeacher(Teacher teacher)
         {
-            var teacher = await _dbContext.Set<Teacher>().Where(w => w.Department.DepartmentName == filter.DepartmentName).ToArrayAsync(cancellationToken);
-
+            _dbContext.Add(teacher);
+            await _dbContext.SaveChangesAsync();
             return teacher;
+        }
+
+        public bool DeleteTeacher(Teacher teacher)
+        {
+            _dbContext.Remove(teacher);
+            return _dbContext.SaveChanges() > 0;
+        }
+
+        public bool TeacherExists(int teacherId)
+        {
+            return _dbContext.Teachers.Any(t => t.TeacherId == teacherId);
+        }
+
+        public bool UpdateTeacher(Teacher teacher)
+        {
+            _dbContext.Update(teacher);
+            return _dbContext.SaveChanges() > 0;
         }
     }
 }

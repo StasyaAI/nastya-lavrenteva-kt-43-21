@@ -36,7 +36,7 @@ try
         app.UseSwaggerUI();
     }
 
-    app.UseMiddleware<ExceptionHandlerMiddleware>();
+   // app.UseMiddleware<ExceptionHandlerMiddleware>();
 
     app.UseAuthorization();
 
@@ -47,6 +47,7 @@ try
 }
 catch (Exception ex)
 {
+
     logger.Error(ex, "Stopped program because of exception.");
 }
 finally
