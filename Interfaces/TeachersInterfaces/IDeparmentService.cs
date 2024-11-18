@@ -1,6 +1,7 @@
 ﻿using _1_лабораторная.Database;
 using _1_лабораторная.Filters.TeacherFilters;
 using _1_лабораторная.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace _1_лабораторная.Interfaces.TeachersInterfaces
 {
@@ -13,6 +14,7 @@ namespace _1_лабораторная.Interfaces.TeachersInterfaces
         public bool DepartmentExists(int deparmentId);
         public bool UpdateDepartment(Department department);
         public bool DeleteDepartment(Department department);
+        public Task<Department[]> GetDepartmentByIdAsync(DeparrtmentIdFilter filter, CancellationToken cancellationToken = default);
     }
 
     public class DepartmentService : IDepartmentService
@@ -61,6 +63,14 @@ namespace _1_лабораторная.Interfaces.TeachersInterfaces
         {
             _dbContext.Remove(department);
             return _dbContext.SaveChanges() > 0;
+        }
+
+        public async Task<Department[]> GetDepartmentByIdAsync(DeparrtmentIdFilter filter, CancellationToken cancellationToken = default)
+
+        {
+            var Department = await _dbContext.Set<Department>().Where(w => w.DepartmentId == filter.DepartmentId).ToArrayAsync(cancellationToken);
+
+            return Department;
         }
     }
 }

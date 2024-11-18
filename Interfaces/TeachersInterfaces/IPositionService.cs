@@ -22,5 +22,6 @@ namespace _1_лабораторная.Interfaces.TeachersInterfaces
         {
             return _dbContext.Positions.Where(d => d.PositionId == positionId).FirstOrDefault();
         }
+
     }
 }

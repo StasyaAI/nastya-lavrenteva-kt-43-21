@@ -1,4 +1,5 @@
-﻿using _1_лабораторная.Interfaces.TeachersInterfaces;
+﻿using _1_лабораторная.Filters.TeacherFilters;
+using _1_лабораторная.Interfaces.TeachersInterfaces;
 using _1_лабораторная.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -89,6 +90,14 @@ namespace _1_лабораторная.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpPost("GetDepartmentByIdAsync")]
+        public async Task<IActionResult> GetTeachersByDepartmentAsync(DeparrtmentIdFilter filter, CancellationToken cancellationToken = default)
+        {
+            var teachers = await _departmentService.GetDepartmentByIdAsync(filter, cancellationToken);
+
+            return Ok(teachers);
         }
     }
 }
