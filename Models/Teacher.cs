@@ -2,6 +2,8 @@
 {
     public class Teacher
     {
+        internal string departmentName;
+
         public int TeacherId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

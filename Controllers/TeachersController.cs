@@ -39,6 +39,13 @@ namespace _1_лабораторная.Controllers
 
             return Ok(teachers);
         }
+        [HttpPost("GetTeachersByDepartmentNameAsync")]
+        public async Task<IActionResult> GetTeachersByDepartmentNameAsync(DeparrtmentNameFilter filter, CancellationToken cancellationToken = default)
+        {
+            var teachers = await _teacherFilterService.GetTeachersByDepartmentNameAsync(filter, cancellationToken);
+
+            return Ok(teachers);
+        }
 
         [HttpPost("GetTeachersByPositionAsync")]
         public async Task<IActionResult> GetTeachersByPositionAsync(TeacherPositionFilter filter, CancellationToken cancellationToken = default)

@@ -2,6 +2,8 @@
 using _1_лабораторная.Filters.TeacherFilters;
 using _1_лабораторная.Models;
 using Microsoft.EntityFrameworkCore;
+using NLog.Filters;
+using System.Threading;
 
 namespace _1_лабораторная.Interfaces.TeachersInterfaces
 {
@@ -11,6 +13,7 @@ namespace _1_лабораторная.Interfaces.TeachersInterfaces
         public Task<Teacher[]> GetTeachersByDataAsync(TeacherDataFilter filter, CancellationToken cancellationToken);
         public Task<Teacher[]> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken);
         public Task<Teacher[]> GetTeachersByPositionAsync(TeacherPositionFilter filter, CancellationToken cancellationToken);
+        public Task<Teacher[]> GetTeachersByDepartmentNameAsync(DeparrtmentNameFilter filter, CancellationToken cancellationToken);
     }
 
     public class ITeacherFilterService : ITeacherFilterInterfaceService
@@ -26,16 +29,27 @@ namespace _1_лабораторная.Interfaces.TeachersInterfaces
             return _dbContext.Teachers.Where(t => t.TeacherId == teacherId).FirstOrDefault();
         }
 
+        public Teacher GetTeacherByDepartmentName(string departmentName)
+        {
+            return _dbContext.Teachers.Where(t => t.departmentName == departmentName).FirstOrDefault();
+        }
+
+
         public Task<Teacher[]> GetTeachersByDataAsync(TeacherDataFilter filter, CancellationToken cancellationToken = default)
         {
             var teacher = _dbContext.Set<Teacher>().Where(w => w.LastName == filter.LastName).ToArrayAsync(cancellationToken);
-
             return teacher;
         }
 
         public async Task<Teacher[]> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken = default)
         {
             var teacher = await _dbContext.Set<Teacher>().Where(w => w.Department.DepartmentId == filter.DepartmentId).ToArrayAsync(cancellationToken);
+       
+            return teacher;
+        }
+        public async Task<Teacher[]> GetTeachersByDepartmentNameAsync( DeparrtmentNameFilter filter, CancellationToken cancellationToken = default)
+        {
+            var teacher = await _dbContext.Set<Teacher>().Where(w => w.Department.DepartmentName == filter.DepartmentName).ToArrayAsync(cancellationToken);
 
             return teacher;
         }
