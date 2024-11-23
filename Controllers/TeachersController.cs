@@ -55,8 +55,8 @@ namespace _1_лабораторная.Controllers
             return Ok(teachers);
         }
 
-        [HttpPost("GetTeachersByLastNameAsync")]
-        public async Task<IActionResult> GetTeachersByLastNameAsync(TeacherDataFilter filter, CancellationToken cancellationToken = default)
+        [HttpPost("GetTeachersByNameAsync")]
+        public async Task<IActionResult> GetTeachersByNameAsync(TeacherDataFilter filter, CancellationToken cancellationToken = default)
         {
             var teachers = await _teacherFilterService.GetTeachersByDataAsync(filter, cancellationToken);
 

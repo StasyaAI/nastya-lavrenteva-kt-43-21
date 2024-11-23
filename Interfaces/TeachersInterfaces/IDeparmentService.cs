@@ -36,10 +36,6 @@ namespace _1_лабораторная.Interfaces.TeachersInterfaces
             return _dbContext.Department.Where(d => d.DepartmentId == id).FirstOrDefault();
         }
 
-        public Task<Department> DeleteDepartment(TeacherDepartmentFilter department, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<Department> AddDepartment(Department department)
         {
@@ -71,6 +67,11 @@ namespace _1_лабораторная.Interfaces.TeachersInterfaces
             var Department = await _dbContext.Set<Department>().Where(w => w.DepartmentId == filter.DepartmentId).ToArrayAsync(cancellationToken);
 
             return Department;
+        }
+
+        public Task<Department> DeleteDepartment(TeacherDepartmentFilter department, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

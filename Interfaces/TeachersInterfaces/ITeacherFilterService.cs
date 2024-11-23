@@ -37,7 +37,8 @@ namespace _1_лабораторная.Interfaces.TeachersInterfaces
 
         public Task<Teacher[]> GetTeachersByDataAsync(TeacherDataFilter filter, CancellationToken cancellationToken = default)
         {
-            var teacher = _dbContext.Set<Teacher>().Where(w => w.LastName == filter.LastName).ToArrayAsync(cancellationToken);
+            var teacher = _dbContext.Set<Teacher>().Where(w => w.FirstName == filter.FirstName && w.LastName == filter.LastName && w.MiddleName == filter.MiddleName).ToArrayAsync(cancellationToken);
+
             return teacher;
         }
 
